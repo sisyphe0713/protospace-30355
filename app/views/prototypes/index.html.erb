@@ -4,7 +4,12 @@
     <%# ログインしているときは以下を表示する %>
       <div class="greeting">
         こんにちは、
-        <%= link_to "#{current_user.name}さん" , prototype_user_path(@prototypes.ids, current_user.id), class: :greeting__link %>
+        <% if @prototypes.ids.empty? %>
+          <%= link_to "#{current_user.name}さん", root_path, class: :greeting__link %>
+          <%# <%= link_to "#{current_user.name}さん" , prototype_user_path(@prototypes.ids, current_user.id), class: :greeting__link %>
+        <% else %>
+          <%= link_to "#{current_user.name}さん", prototype_user_path(@prototypes.ids, current_user.id), class: :greeting__link %>
+        <% end %>
       </div>
     <%# // ログインしているときは上記を表示する %>
     <% end %>
